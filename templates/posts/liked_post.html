@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+<title>{% block title %}Liked Posts{% endblock %}</title>
+{% block content %}
+{% load static %}
+  <div class="wrap">
+    <div class="div-block">
+      <h1 class="title">Your Liked Posts</h1>
+      <h3 class="sub-head">
+          All the posts you liked while browsing
+          <a href="https://spreadshare.co/stream/133"><br></a>
+      </h3>
+    </div>
+    <div class="collection">
+      {% for post in liked_post_list %}
+          <div class="collection-item">
+              <img src="{% static 'images/132.png' %}" srcset="{% static 'images/132-p-500.png' %} 500w, {% static 'images/132-p-800.png' %} 800w, {% static 'images/132-p-1080.png' %} 1080w, {% static 'images/132.png' %} 1200w" sizes="(max-width: 479px) 100vw, (max-width: 991px) 30vw, 290.390625px" alt="" class="post_img">
+            <h2 class="post_title">{{ post.title }}<br></h2>
+            <p class="post_desc">
+                {{ post.content|truncatechars:200 }}
+            </p>
+            <a href="{% url 'posts:remove_from_like' post.pk %}">
+                  <img src="{% static 'images/heart.png' %}" alt="" class="like_icon">
+            </a>
+          </div>
+      {% endfor %}
+    </div>
+    {% include 'sources_tags.html' %}
+  </div>
+{% endblock %}

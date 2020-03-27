@@ -1,0 +1,16 @@
+{% load static %}
+
+  <div class="wrap">
+    <div class="tags-row">
+      <h3 class="tag-title">Top curators</h3>
+      <div class="tags-block curators">
+          {% for curator in curators_list %}
+              <a href="{% url 'users:profile' curator.pk %}" class="curator_link_blog w-inline-block">
+                  <img src="{% static 'images/251.jpg' %}" alt="" class="avator">
+                  <h1 class="curator-name">{{ curator.name }}</h1>
+                  <p class="curator-bio">{{ curator.bio }}<br></p>
+              </a>
+          {% endfor %}
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+<title>{% block title %}Category|{{ category.name }}{% endblock %}</title>
+{% block content %}
+{% load static %}
+    <div class="wrap">
+        <div class="div-block">
+          <h1 class="ctg-title">{{ category.name }}</h1>
+          <h3 class="sub-head">
+              {{ category.posts.all.count }} items in this category
+              <a href="https://spreadshare.co/stream/133"><br></a>
+          </h3>
+        </div>
+        <div class="collection">
+          {% for post in category.posts.all %}
+              <div class="collection-item">
+                  <img src="{% static 'images/132.png' %}" srcset="{% static 'images/132-p-500.png' %} 500w, {% static 'images/132-p-800.png' %} 800w, {% static 'images/132-p-1080.png' %} 1080w, {% static 'images/132.png' %} 1200w" sizes="(max-width: 479px) 29vw, (max-width: 991px) 30vw, 290.390625px" alt="" class="post_img">
+                <h2 class="post_title">{{ post.title }}<br></h2>
+                <p class="post_desc">
+                    {{ post.content|truncatechars:200 }}
+                </p>
+                  <img src="{% static 'images/heart.svg' %}" alt="" class="like_icon">
+              </div>
+          {% endfor %}
+        </div>
+        {% include 'sources_tags.html' %}
+    </div>
+{% endblock %}

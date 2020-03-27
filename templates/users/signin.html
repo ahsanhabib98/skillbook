@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+<title>{% block title %}Sign In{% endblock %}</title>
+{% block content %}
+  <div class="wrap">
+    <div class="div-block">
+      <h1 class="title">Sign in to your account</h1>
+      <h3 class="sub-head">
+          Use the below form to sign in
+          <a href="https://spreadshare.co/stream/133"><br></a>
+      </h3>
+      <div class="form-block-2 w-form">
+        <form id="form" name="form" data-name="SignIn Form" action="." method="post">
+            {% csrf_token %}
+            <label for="email" class="field-label">Email Address</label>
+            <input type="email" class="text-field w-input" name="email" data-name="Email" placeholder="eg. email@gmail.com" id="email" required="">
+            <label for="password" class="field-label">Password</label>
+            <input type="password" class="text-field w-input" name="password" data-name="Password" placeholder="eg. ******&#x27;" id="password" required="">
+            <button type="submit" data-wait="Please wait..." class="submit-button-2 w-button">Sign In</button>
+        </form>
+        <div class="w-form-done">
+          <div>Thank you! Your submission has been received!</div>
+        </div>
+        <div class="w-form-fail">
+          <div>Oops! Something went wrong while submitting the form.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% include 'subscribe.html' %}
+{% endblock %}

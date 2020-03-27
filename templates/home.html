@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+<title>{% block title %}Home{% endblock %}</title>
+{% block content %}
+{% load static %}
+  <div class="wrap">
+    <div class="div-block">
+      <div data-w-id="8e04ccf9-aad9-56f7-a5e4-abf16ac65bdf" data-animation-type="lottie" data-src="https://uploads-ssl.webflow.com/5d6cfc49b150334787073b44/5d708aae9b8d7bf1b98a1e42_9065-notifications.json" data-loop="1" data-direction="-1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="2.033333333333333" data-duration="0" class="lottie-animation"></div>
+      <h1 class="title">Explore your potentials</h1>
+      <h3 class="sub-head">We curate the best Resources to help you learn<a href="https://spreadshare.co/stream/133"><br></a></h3>
+    </div>
+    <div class="collection">
+      {% for post in post_list %}
+          <div class="collection-item">
+              <img src="{% static 'images/132.png' %}" srcset="{% static 'images/132-p-500.png' %} 500w, {% static 'images/132-p-800.png' %} 800w, {% static 'images/132-p-1080.png' %} 1080w, {% static 'images/132.png' %} 1200w" sizes="(max-width: 479px) 29vw, (max-width: 991px) 30vw, 290.390625px" alt="" class="post_img">
+            <h2 class="post_title">{{ post.title }}<br></h2>
+            <p class="post_desc">
+                {{ post.content|truncatechars:200 }}
+            </p>
+            {% if request.user.profile in post.liked.all %}
+                <a href="{% url 'posts:remove_from_like' post.pk %}">
+                  <img src="{% static 'images/heart.png' %}" alt="" class="like_icon">
+                </a>
+            {% else %}
+                <a href="{% url 'posts:add_to_like' post.pk %}">
+                  <img src="{% static 'images/heart.svg' %}" alt="" class="like_icon">
+                </a>
+            {% endif %}
+          </div>
+      {% endfor %}
+    </div>
+    {% include 'sources_tags.html' %}
+  </div>
+  {% include 'subscribe.html' %}
+  {% include 'curators.html' %}
+{% endblock %}

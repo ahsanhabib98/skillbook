@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+<title>{% block title %}New Post{% endblock %}</title>
+{% block content %}
+<div class="wrap">
+    <div class="div-block">
+      <h1 class="title">Create a new post for the community</h1>
+      <h3 class="sub-head">
+          You can use this form to share what you want by making a post
+          <a href="https://spreadshare.co/stream/133"><br></a>
+      </h3>
+      <div class="form-block-2 w-form">
+        <form id="form" name="form" data-name="Post Form" action="." method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <label for="title" class="field-label">Post title</label>
+            {{ form.title }}
+            <label for="source_link" class="field-label">Source Link</label>
+            {{ form.source_link }}
+            <label for="content" class="field-label">Source Bio</label>
+            {{ form.content }}
+            <label for="Post-bio" class="field-label">Choose a Badge:</label>
+          <div class="cattegories_selection">
+              {% for category in form.fields.category.queryset %}
+                  <label class="radio-button-field w-radio">
+                      <input required type="radio" data-name="Radio" id="{{ category.name }}" name="category" value="{{ category.pk }}" class="w-form-formradioinput w-radio-input">
+                      <span for="{{ category.name }}" class="w-form-label">{{ category.name }}</span>
+                  </label>
+              {% endfor %}
+          </div>
+          <button type="submit" data-wait="Please wait..." class="submit-button-2 w-button">Create</button>
+        </form>
+        <div class="w-form-done">
+          <div>Thank you! Your submission has been received!</div>
+        </div>
+        <div class="w-form-fail">
+          <div>Oops! Something went wrong while submitting the form.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

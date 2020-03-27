@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+<title>{% block title %}Profile{% endblock %}</title>
+{% block content %}
+{% load static %}
+<div class="wrap">
+    <div class="div-block"><img src="{% static 'images/251.jpg' %}" alt="" class="profile-avator">
+      <h1 class="title">{{ profile.name }}</h1>
+      <p class="paragraph-2">{{ profile.designation }}</p>
+      <div class="div-block-2">
+        <h3 class="sub-head">{{ profile.bio }}
+            <a href="https://spreadshare.co/stream/133"><br></a>
+        </h3>
+        <div class="counts">
+          <h3 class="sub-head">{{ profile.posts.all.count }}
+              <span class="text-span">posts</span>
+              <a href="https://spreadshare.co/stream/133"><br></a>
+          </h3>
+          <h3 class="sub-head">{{ profile.liked_posts.all.count }}
+              <span class="text-span">liked post</span>
+              <a href="https://spreadshare.co/stream/133"><br></a>
+          </h3>
+          <h3 class="sub-head">3
+              <span class="text-span">saved posts</span>
+              <a href="https://spreadshare.co/stream/133"><br></a>
+          </h3>
+        </div>
+      </div>
+    </div>
+    <h1 class="title-copy">Your own posts:</h1>
+    <div class="collection">
+      {% for post in profile.posts.all %}
+          <div class="collection-item">
+              <img src="{% static 'images/132.png' %}" srcset="{% static 'images/132-p-500.png' %} 500w, {% static 'images/132-p-800.png' %} 800w, {% static 'images/132-p-1080.png' %} 1080w, {% static 'images/132.png' %} 1200w" sizes="(max-width: 479px) 29vw, (max-width: 991px) 30vw, 290.390625px" alt="" class="post_img">
+            <h2 class="post_title">{{ post.title }}<br></h2>
+            <p class="post_desc">
+                {{ post.content|truncatechars:200 }}
+            </p>
+              <img src="{% static 'images/heart.svg' %}" alt="" class="like_icon">
+          </div>
+      {% endfor %}
+    </div>
+    <h1 class="title-copy">Your liked posts:</h1>
+    <div class="collection">
+      <div class="collection-item">
+          <img src="{% static 'images/132.png' %}" srcset="{% static 'images/132-p-500.png' %} 500w, {% static 'images/132-p-800.png' %} 800w, {% static 'images/132-p-1080.png' %} 1080w, {% static 'images/132.png' %} 1200w" sizes="(max-width: 479px) 29vw, (max-width: 991px) 30vw, 290.390625px" alt="" class="post_img">
+        <h2 class="post_title">9 React Styled-Components UI Libraries for 2018<br></h2>
+        <p class="post_desc">We’ll take a quick look at 10 of the most important and interesting cryptos, and explain what issues they have and where they’re going, curated by</p>
+          <img src="{% static 'images/heart.svg' %}" alt="" class="like_icon">
+      </div>
+      <div class="collection-item">
+          <img src="{% static 'images/131.png' %}" srcset="{% static 'images/131-p-500.png' %} 500w, {% static 'images/131-p-800.png' %} 800w, {% static 'images/131-p-1080.png' %} 1080w, {% static 'images/131.png' %} 1200w" sizes="(max-width: 479px) 29vw, (max-width: 991px) 30vw, 290.390625px" alt="" class="post_img">
+        <h2 class="post_title">Book recommendation for every creative to grow<br></h2>
+        <p class="post_desc">We’ll take a quick look at 10 of the most important and interesting cryptos, and explain what issues they have and where they’re going, curated by</p>
+          <img src="{% static 'images/heart.svg' %}" alt="" class="like_icon">
+      </div>
+      <div class="collection-item">
+          <img src="{% static 'images/129.png' %}" srcset="{% static 'images/129-p-500.png' %} 500w, {% static 'images/129-p-800.png' %} 800w, {% static 'images/129-p-1080.png' %} 1080w, {% static 'images/129.png' %} 1200w" sizes="(max-width: 479px) 29vw, (max-width: 991px) 30vw, 290.390625px" alt="" class="post_img">
+        <h2 class="post_title">UX Laws to become a better designer<br></h2>
+        <p class="post_desc">We’ll take a quick look at 10 of the most important and interesting cryptos, and explain what issues they have and where they’re going, curated by</p>
+          <img src="{% static 'images/heart.svg' %}" alt="" class="like_icon">
+      </div>
+    </div>
+    <h1 class="title-copy">Your saved posts:</h1>
+    <div class="collection">
+      <div class="collection-item">
+          <img src="{% static 'images/132.png' %}" srcset="{% static 'images/132-p-500.png' %} 500w, {% static 'images/132-p-800.png' %} 800w, {% static 'images/132-p-1080.png' %} 1080w, {% static 'images/132.png' %} 1200w" sizes="(max-width: 479px) 29vw, (max-width: 991px) 30vw, 290.390625px" alt="" class="post_img">
+        <h2 class="post_title">9 React Styled-Components UI Libraries for 2018<br></h2>
+        <p class="post_desc">We’ll take a quick look at 10 of the most important and interesting cryptos, and explain what issues they have and where they’re going, curated by</p>
+          <img src="{% static 'images/heart.svg' %}" alt="" class="like_icon">
+      </div>
+      <div class="collection-item">
+          <img src="{% static 'images/131.png' %}" srcset="{% static 'images/131-p-500.png' %} 500w, {% static 'images/131-p-800.png' %} 800w, {% static 'images/131-p-1080.png' %} 1080w, {% static 'images/131.png' %} 1200w" sizes="(max-width: 479px) 29vw, (max-width: 991px) 30vw, 290.390625px" alt="" class="post_img">
+        <h2 class="post_title">Book recommendation for every creative to grow<br></h2>
+        <p class="post_desc">We’ll take a quick look at 10 of the most important and interesting cryptos, and explain what issues they have and where they’re going, curated by</p>
+          <img src="{% static 'images/heart.svg' %}" alt="" class="like_icon">
+      </div>
+      <div class="collection-item">
+          <img src="{% static 'images/129.png' %}" srcset="{% static 'images/129-p-500.png' %} 500w, {% static 'images/129-p-800.png' %} 800w, {% static 'images/129-p-1080.png' %} 1080w, {% static 'images/129.png' %} 1200w" sizes="(max-width: 479px) 29vw, (max-width: 991px) 30vw, 290.390625px" alt="" class="post_img">
+        <h2 class="post_title">UX Laws to become a better designer<br></h2>
+        <p class="post_desc">We’ll take a quick look at 10 of the most important and interesting cryptos, and explain what issues they have and where they’re going, curated by</p>
+          <img src="{% static 'images/heart.svg' %}" alt="" class="like_icon">
+      </div>
+    </div>
+  </div>
+  {% include 'subscribe.html' %}
+{% endblock %}

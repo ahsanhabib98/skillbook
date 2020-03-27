@@ -1,0 +1,10 @@
+<div class="tags-row">
+  <h4 class="tag-title">Sources Tags<a href="https://spreadshare.co/tag/16944"><br></a></h4>
+  <div class="tags-block">
+    {% for category in category_list %}
+    <a href="{% url 'posts:post_category' category.pk %}" class="tag_link_block w-inline-block">
+      <div class="tag_text">{{ category.name }}</div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
