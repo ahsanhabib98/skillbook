@@ -1,1 +1,1 @@
-web: gunicorn geo_coat.wsgi
+web: gunicorn skillbook.wsgi
