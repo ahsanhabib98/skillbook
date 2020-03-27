@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -59,7 +60,7 @@ class ProfileDetailView(DetailView):
     template_name = 'users/profile.html'
 
 
-class EditProfileView(View):
+class EditProfileView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         profile = Profile.objects.get(user=self.request.user)
         form = ProfileForm(instance=profile)
@@ -101,7 +102,7 @@ class ProfileListView(ListView):
     template_name = 'users/curators_list.html'
 
 
-class ProfileWiseLikedPostView(ListView):
+class ProfileWiseLikedPostView(LoginRequiredMixin, ListView):
     model = Post
     context_object_name = 'liked_post_list'
     template_name = 'posts/liked_post.html'

@@ -1,4 +1,6 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import CreateView, DetailView
@@ -8,7 +10,7 @@ from skillbook_app.models import Post, PostCategory
 from users.models import Profile
 
 
-class PostCreatView(SuccessMessageMixin, CreateView):
+class PostCreatView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Post
     form_class = PostForm
     template_name = 'posts/post_create.html'
@@ -31,6 +33,7 @@ class PostCategoryView(DetailView):
         return context
 
 
+@login_required
 def add_to_like(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.liked.add(request.user.profile)
@@ -39,6 +42,7 @@ def add_to_like(request, pk):
     return redirect('home')
 
 
+@login_required
 def remove_from_like(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.liked.remove(request.user.profile)
