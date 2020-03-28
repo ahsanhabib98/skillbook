@@ -28,9 +28,7 @@
             </a>
           <div class="nav-links">
               <a href="{% url 'home' %}" class="link">Home</a>
-              <a href="#" class="link">About</a>
               <a href="{% url 'users:curators' %}" class="link">Curators</a>
-              <a href="#" class="link">Create</a>
           </div>
         </div>
         {% if request.user.is_authenticated %}
@@ -42,7 +40,6 @@
                 <div class="profile_click_content">
                     <a href="{% url 'users:profile' request.user.profile.pk %}" aria-current="page" class="link_white w--current">Profile</a>
                     <a href="{% url 'posts:post_create' %}" class="link_white">New Post</a>
-                    <a href="saved-posts.html" class="link_white">Saved Posts</a>
                     <a href="{% url 'users:edit-profile' %}" class="link_white">Edit Profile</a>
                     <a href="{% url 'users:liked_post' %}" class="link_white">Liked Posts</a>
                     <a href="{% url 'users:logout' %}" class="logged_out">Log Out</a></div>
@@ -72,10 +69,8 @@
                 <img src="{% static 'images/logo-1.svg' %}" alt="" class="image">
             </a>
           <div class="nav-links">
-              <a href="#" class="link">Home</a>
-              <a href="#" class="link">About</a>
-              <a href="#" class="link">Curators</a>
-              <a href="#" class="link">Create</a>
+              <a href="{% url 'home' %}" class="link">Home</a>
+              <a href="{% url 'users:curators' %}" class="link">Curators</a>
           </div>
         </div>
         {% if not request.user.is_authenticated %}

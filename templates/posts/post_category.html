@@ -18,7 +18,15 @@
                 <p class="post_desc">
                     {{ post.content|truncatechars:200 }}
                 </p>
-                  <img src="{% static 'images/heart.svg' %}" alt="" class="like_icon">
+                {% if request.user.profile in post.liked.all %}
+                    <a href="{% url 'posts:remove_from_like' post.pk %}">
+                      <img src="{% static 'images/heart.png' %}" alt="" class="like_icon">
+                    </a>
+                {% else %}
+                    <a href="{% url 'posts:add_to_like' post.pk %}">
+                      <img src="{% static 'images/heart.svg' %}" alt="" class="like_icon">
+                    </a>
+                {% endif %}
               </div>
           {% endfor %}
         </div>
