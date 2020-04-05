@@ -41,6 +41,11 @@
                       <img src="{% static 'images/heart.svg' %}" alt="" class="like_icon">
                     </a>
                 {% endif %}
+              {% if request.user.is_authenticated %}
+                  <a class="submit-button-2 w-button" href="{% url 'posts:post_update' post.id %}">Update</a>
+                      <br>
+                  <a class="submit-button-2 w-button" href="{% url 'posts:post_delete' post.id %}">Delete</a>
+              {% endif %}
               </div>
           {% endfor %}
       {% else %}

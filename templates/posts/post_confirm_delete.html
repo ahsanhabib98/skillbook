@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+<title>{% block title %}Delete Posts{% endblock %}</title>
+{% block content %}
+  <div class="wrap">
+    <div class="div-block">
+      <h1 class="title">Create a new post for the community</h1>
+      <h3 class="sub-head">
+          You can use this form to share what you want by making a post
+          <a href="https://spreadshare.co/stream/133"><br></a>
+      </h3>
+      <div class="form-block-2 w-form">
+        <form id="form" name="form" data-name="Post Form" action="." method="post">
+            {% csrf_token %}
+            <p>Are you sure you want to delete "{{ object }}"?</p>
+            <input type="submit" value="Confirm" data-wait="Please wait..." class="submit-button-2 w-button">
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
