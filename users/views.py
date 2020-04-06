@@ -1,9 +1,10 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import DetailView
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.views.generic import View, ListView
+from django.views.generic import View, ListView, UpdateView
 
 from skillbook_app.models import Post, PostCategory
 from .forms import UserCreationForm, ProfileForm
@@ -60,40 +61,59 @@ class ProfileDetailView(DetailView):
     template_name = 'users/profile.html'
 
 
-class EditProfileView(LoginRequiredMixin, View):
-    def get(self, *args, **kwargs):
-        profile = Profile.objects.get(user=self.request.user)
-        form = ProfileForm(instance=profile)
-        context = {
-            'form': form
-        }
-        template = 'users/edit_profile.html'
-        return render(self.request, template, context)
+class EditProfileView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Profile
+    form_class = ProfileForm
+    template_name = 'users/edit_profile.html'
+    success_message = 'Successfully updated your profile.'
 
-    def post(self, *args, **kwargs):
-        form = ProfileForm(self.request.POST, self.request.FILES)
-        if form.is_valid():
-            profile = form.save(commit=False)
-            user = self.request.user
-            if user.email != profile.email:
-                if UserProfile.objects.filter(email=profile.email).exists():
-                    messages.warning(self.request, "Your can not use this email cz this account already exist.")
-                    return redirect('users:edit-profile')
+    def form_valid(self, form):
+        profile = form.save(commit=False)
+        user = self.request.user
+        if user.email != profile.email:
+            if UserProfile.objects.filter(email=profile.email).exists():
+                messages.warning(self.request, "Your can not use this email cz this account already exist.")
+                return redirect('users:edit-profile')
 
-            userProfile = Profile.objects.get(user=user)
-            userProfile.name = profile.name
-            user.name = profile.name
-            userProfile.email = profile.email
-            user.email = profile.email
-            userProfile.designation = profile.designation
-            userProfile.bio = profile.bio
-            userProfile.source_bio = profile.source_bio
-            userProfile.save()
-            user.save()
-            messages.info(self.request, "Updated your profile.")
-            return redirect('home')
-        messages.info(self.request, "Your profile data is not valid.")
-        return redirect('users:edit-profile')
+        user.name = profile.name
+        user.email = profile.email
+        user.save()
+        return super().form_valid(form)
+
+    # def get(self, *args, **kwargs):
+    #     profile = Profile.objects.get(user=self.request.user)
+    #     form = ProfileForm(instance=profile)
+    #     context = {
+    #         'form': form
+    #     }
+    #     template = 'users/edit_profile.html'
+    #     return render(self.request, template, context)
+    #
+    # def post(self, *args, **kwargs):
+    #     form = ProfileForm(self.request.POST, self.request.FILES)
+    #     if form.is_valid():
+    #         profile = form.save(commit=False)
+    #         user = self.request.user
+    #         if user.email != profile.email:
+    #             if UserProfile.objects.filter(email=profile.email).exists():
+    #                 messages.warning(self.request, "Your can not use this email cz this account already exist.")
+    #                 return redirect('users:edit-profile')
+    #
+    #         userProfile = Profile.objects.get(user=user)
+    #         userProfile.name = profile.name
+    #         user.name = profile.name
+    #         userProfile.email = profile.email
+    #         user.email = profile.email
+    #         userProfile.designation = profile.designation
+    #         userProfile.bio = profile.bio
+    #         userProfile.source_bio = profile.source_bio
+    #         userProfile.image = profile.image
+    #         userProfile.save()
+    #         user.save()
+    #         messages.info(self.request, "Updated your profile.")
+    #         return redirect('home')
+    #     messages.info(self.request, "Your profile data is not valid.")
+    #     return redirect('users:edit-profile')
 
 
 class ProfileListView(ListView):

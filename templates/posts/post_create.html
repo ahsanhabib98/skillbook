@@ -11,6 +11,10 @@
       <div class="form-block-2 w-form">
         <form id="form" name="form" data-name="Post Form" action="." method="post" enctype="multipart/form-data">
         {% csrf_token %}
+            <label for="image" class="field-label">Post image</label>
+            {{ form.image }}
+            <br>
+            <br>
             <label for="title" class="field-label">Post title</label>
             {{ form.title }}
             <label for="source_link" class="field-label">Source Link</label>

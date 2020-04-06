@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 from skillbook import settings
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from PIL import Image
@@ -88,6 +90,9 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.name} Profile'
+
+    def get_absolute_url(self):
+        return reverse('users:profile', kwargs={'pk': self.pk})
 
 #     def save(self):
 #         super().save()

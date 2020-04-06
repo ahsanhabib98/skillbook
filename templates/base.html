@@ -35,12 +35,16 @@
             <div class="nav-right">
                 <a href="{% url 'posts:post_create' %}" class="sign_in w-button">Add a new post</a>
               <div data-w-id="b0ad840d-3d76-01c1-bfbc-59d62871a568" class="profile">
-                  <img src="{% static 'images/251.jpg' %}" alt="" class="profile_avator">
+                  {% if request.user.profile.image %}
+                    <img src="{{ request.user.profile.image.url }}" alt="" class="profile_avator">
+                  {% else %}
+                    <img src="{% static 'images/Unknown.png' %}" alt="" class="profile_avator">
+                  {% endif %}
                   <img src="{% static 'images/chevron-down.svg' %}" alt="" class="profile_arrow">
                 <div class="profile_click_content">
                     <a href="{% url 'users:profile' request.user.profile.pk %}" aria-current="page" class="link_white w--current">Profile</a>
                     <a href="{% url 'posts:post_create' %}" class="link_white">New Post</a>
-                    <a href="{% url 'users:edit-profile' %}" class="link_white">Edit Profile</a>
+                    <a href="{% url 'users:edit-profile' request.user.profile.pk %}" class="link_white">Edit Profile</a>
                     <a href="{% url 'users:liked_post' %}" class="link_white">Liked Posts</a>
                     <a href="{% url 'users:logout' %}" class="logged_out">Log Out</a></div>
               </div>

@@ -69,7 +69,7 @@ class UserChangeForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('name', 'email', 'designation', 'bio', 'source_bio')
+        fields = ('name', 'email', 'designation', 'bio', 'source_bio', 'image')
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'text-field w-input',

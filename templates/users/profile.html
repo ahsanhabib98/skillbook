@@ -3,7 +3,12 @@
 {% block content %}
 {% load static %}
 <div class="wrap">
-    <div class="div-block"><img src="{% static 'images/251.jpg' %}" alt="" class="profile-avator">
+    <div class="div-block">
+        {% if profile.image %}
+            <img src="{{ profile.image.url }}" alt="" class="profile-avator">
+        {% else %}
+            <img src="{% static 'images/Unknown.png' %}" alt="" class="profile-avator">
+        {% endif %}
       <h1 class="title">{{ profile.name }}</h1>
       <p class="paragraph-2">{{ profile.designation }}</p>
       <div class="div-block-2">
@@ -27,7 +32,10 @@
       {% if profile.posts.all %}
           {% for post in profile.posts.all %}
               <div class="collection-item">
-                  <img src="{% static 'images/132.png' %}" srcset="{% static 'images/132-p-500.png' %} 500w, {% static 'images/132-p-800.png' %} 800w, {% static 'images/132-p-1080.png' %} 1080w, {% static 'images/132.png' %} 1200w" sizes="(max-width: 479px) 29vw, (max-width: 991px) 30vw, 290.390625px" alt="" class="post_img">
+{#              {{ post.image.url }}#}
+                  <a href="{{ post.source_link }}" target="_blank">
+                      <img src="{% static 'images/132.png' %}" sizes="(max-width: 479px) 29vw, (max-width: 991px) 30vw, 290.390625px" alt="" class="post_img">
+                  </a>
                 <h2 class="post_title">{{ post.title }}<br></h2>
                 <p class="post_desc">
                     {{ post.content|truncatechars:200 }}
@@ -41,7 +49,7 @@
                       <img src="{% static 'images/heart.svg' %}" alt="" class="like_icon">
                     </a>
                 {% endif %}
-              {% if request.user.is_authenticated %}
+              {% if request.user.profile == profile %}
                   <a class="submit-button-2 w-button" href="{% url 'posts:post_update' post.id %}">Update</a>
                       <br>
                   <a class="submit-button-2 w-button" href="{% url 'posts:post_delete' post.id %}">Delete</a>
@@ -59,7 +67,9 @@
       {% if profile.liked_posts.all %}
           {% for post in profile.liked_posts.all %}
               <div class="collection-item">
-                  <img src="{% static 'images/132.png' %}" srcset="{% static 'images/132-p-500.png' %} 500w, {% static 'images/132-p-800.png' %} 800w, {% static 'images/132-p-1080.png' %} 1080w, {% static 'images/132.png' %} 1200w" sizes="(max-width: 479px) 29vw, (max-width: 991px) 30vw, 290.390625px" alt="" class="post_img">
+                <a href="{{ post.source_link }}" target="_blank">
+                      <img src="{% static 'images/132.png' %}" sizes="(max-width: 479px) 29vw, (max-width: 991px) 30vw, 290.390625px" alt="" class="post_img">
+                </a>
                 <h2 class="post_title">{{ post.title }}<br></h2>
                 <p class="post_desc">
                     {{ post.content|truncatechars:200 }}

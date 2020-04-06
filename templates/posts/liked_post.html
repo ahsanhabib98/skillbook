@@ -14,7 +14,9 @@
     {% if liked_post_list %}
           {% for post in liked_post_list %}
               <div class="collection-item">
-                  <img src="{% static 'images/132.png' %}" srcset="{% static 'images/132-p-500.png' %} 500w, {% static 'images/132-p-800.png' %} 800w, {% static 'images/132-p-1080.png' %} 1080w, {% static 'images/132.png' %} 1200w" sizes="(max-width: 479px) 100vw, (max-width: 991px) 30vw, 290.390625px" alt="" class="post_img">
+                <a href="{{ post.source_link }}" target="_blank">
+                      <img src="{% static 'images/132.png' %}" sizes="(max-width: 479px) 29vw, (max-width: 991px) 30vw, 290.390625px" alt="" class="post_img">
+                </a>
                 <h2 class="post_title">{{ post.title }}<br></h2>
                 <p class="post_desc">
                     {{ post.content|truncatechars:200 }}
