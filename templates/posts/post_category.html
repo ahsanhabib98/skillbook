@@ -2,6 +2,7 @@
 <title>{% block title %}Category|{{ category.name }}{% endblock %}</title>
 {% block content %}
 {% load static %}
+{% get_media_prefix as MEDIA_URL %}
     <div class="wrap">
         <div class="div-block">
           <h1 class="ctg-title">{{ category.name }}</h1>
@@ -14,7 +15,7 @@
           {% for post in category.posts.all %}
               <div class="collection-item">
                 <a href="{{ post.source_link }}" target="_blank">
-                      <img src="{% static 'images/132.png' %}" sizes="(max-width: 479px) 29vw, (max-width: 991px) 30vw, 290.390625px" alt="" class="post_img">
+                      <img src="{{ MEDIA_URL }}{{ post.image }}" sizes="(max-width: 479px) 29vw, (max-width: 991px) 30vw, 290.390625px" alt="" class="post_img">
                 </a>
                 <h2 class="post_title">{{ post.title }}<br></h2>
                 <p class="post_desc">

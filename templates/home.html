@@ -2,6 +2,7 @@
 <title>{% block title %}Home{% endblock %}</title>
 {% block content %}
 {% load static %}
+{% get_media_prefix as MEDIA_URL %}
   <div class="wrap">
     <div class="div-block">
       <div data-w-id="8e04ccf9-aad9-56f7-a5e4-abf16ac65bdf" data-animation-type="lottie" data-src="https://uploads-ssl.webflow.com/5d6cfc49b150334787073b44/5d708aae9b8d7bf1b98a1e42_9065-notifications.json" data-loop="1" data-direction="-1" data-autoplay="1" data-is-ix2-target="0" data-renderer="svg" data-default-duration="2.033333333333333" data-duration="0" class="lottie-animation"></div>
@@ -12,7 +13,7 @@
       {% for post in post_list %}
           <div class="collection-item">
             <a href="{{ post.source_link }}" target="_blank">
-              <img src="{% static 'images/132.png' %}" sizes="(max-width: 479px) 29vw, (max-width: 991px) 30vw, 290.390625px" alt="" class="post_img">
+                <img src="{{ MEDIA_URL }}{{ post.image }}" sizes="(max-width: 479px) 29vw, (max-width: 991px) 30vw, 290.390625px" alt="" class="post_img">
             </a>
             <h2 class="post_title">{{ post.title }}<br></h2>
             <p class="post_desc">
