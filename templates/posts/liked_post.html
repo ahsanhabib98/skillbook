@@ -25,6 +25,7 @@
                 <a href="{% url 'posts:remove_from_like' post.pk %}">
                       <img src="{% static 'images/heart.png' %}" alt="" class="like_icon">
                 </a>
+                <a class="submit-button-2 w-button" href="{{ post.file.url }}">Download File</a>
               </div>
           {% endfor %}
       {% else %}

@@ -54,6 +54,8 @@
                       <br>
                   <a class="submit-button-2 w-button" href="{% url 'posts:post_delete' post.id %}">Delete</a>
               {% endif %}
+                  <br>
+              <a class="submit-button-2 w-button" href="{{ post.file.url }}">Download File</a>
               </div>
           {% endfor %}
       {% else %}
@@ -83,6 +85,7 @@
                       <img src="{% static 'images/heart.svg' %}" alt="" class="like_icon">
                     </a>
                 {% endif %}
+                <a class="submit-button-2 w-button" href="{{ post.file.url }}">Download File</a>
               </div>
           {% endfor %}
       {% else %}
